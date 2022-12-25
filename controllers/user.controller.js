@@ -32,13 +32,16 @@ exports.saveUser = (req, res) => {
     const data = fs.readFileSync(process.cwd() + "/data/users.json");
     const users = JSON.parse(data);
     const tmpUser = {
-      id: users.length + 1,
+      id: req.body.id,
       name: req.body.name,
       gender: req.body.gender,
       address: req.body.address,
       contact: req.body.contact,
       photoUrl: req.body.photoUrl,
     };
+    if (!tmpUser.id) {
+      return res.status(400).json({ error: "ID required." });
+    }
     if (!tmpUser.name) {
       return res.status(400).json({ error: "Name required." });
     }
@@ -53,6 +56,10 @@ exports.saveUser = (req, res) => {
     }
     if (!tmpUser.photoUrl) {
       return res.status(400).json({ error: "photoUrl required." });
+    }
+    const checkUser = users.find((it) => it.id === tmpUser.id);
+    if (checkUser) {
+      return res.status(400).json({ error: "Duplicate ID!" });
     }
     users.push(tmpUser);
     fs.writeFile(
@@ -78,7 +85,6 @@ exports.updateUser = (req, res) => {
       return res.status(400).json({ error: "Invalid content!" });
     }
     const indx = result.findIndex((item) => item.id === tmpData.id);
-    delete tmpData.id;
     result[indx] = { ...result[indx], ...tmpData };
     fs.writeFile(
       process.cwd() + "/data/users.json",
@@ -93,5 +99,24 @@ exports.updateUser = (req, res) => {
 };
 
 exports.deleteUser = (req, res) => {
-  
-}
+  try {
+    const data = fs.readFileSync(process.cwd() + "/data/users.json");
+    const result = JSON.parse(data);
+    const { id } = req.body;
+    const checkUser = result.find((it) => it.id === id);
+    if (checkUser) {
+      const newData = result.filter((item) => item.id !== id);
+      fs.writeFile(
+        process.cwd() + "/data/users.json",
+        JSON.stringify(newData, null, 2),
+        () => {
+          res.status(200).json({ data: { id } });
+        }
+      );
+    } else {
+      res.status(400).json({ error: "Ivalid ID!" });
+    }
+  } catch {
+    res.status(500).json({ error: "Somthing went wrong!" });
+  }
+};
