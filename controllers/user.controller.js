@@ -1,16 +1,30 @@
 const fs = require("fs");
+const url = require("url");
 
 exports.getAllUsers = (req, res) => {
-  const data = fs.readFileSync(process.cwd() + "/data/users.json");
-  const result = JSON.parse(data);
-  res.status(200).json({ data: result });
+  try {
+    const data = fs.readFileSync(process.cwd() + "/data/users.json");
+    const result = JSON.parse(data);
+    const queryObject = url.parse(req.url, true).query;
+    const size = Number(queryObject.limit);
+    if (size && size > 0) {
+      return res.status(200).json({ data: result.slice(0, size) });
+    }
+    res.status(200).json({ data: result });
+  } catch {
+    res.status(500).json({ error: "Somthing went wrong!" });
+  }
 };
 
 exports.getRandomUser = (req, res) => {
-  const data = fs.readFileSync(process.cwd() + "/data/users.json");
-  const users = JSON.parse(data);
-  const rand = Math.floor(Math.random() * users.length);
-  res.status(200).json({ data: users[rand] });
+  try {
+    const data = fs.readFileSync(process.cwd() + "/data/users.json");
+    const users = JSON.parse(data);
+    const rand = Math.floor(Math.random() * users.length);
+    res.status(200).json({ data: users[rand] });
+  } catch {
+    res.status(500).json({ error: "Somthing went wrong!" });
+  }
 };
 
 exports.saveUser = (req, res) => {
@@ -52,3 +66,32 @@ exports.saveUser = (req, res) => {
     res.status(500).json({ error: "Somthing went wrong!" });
   }
 };
+
+exports.updateUser = (req, res) => {
+  try {
+    const data = fs.readFileSync(process.cwd() + "/data/users.json");
+    let result = JSON.parse(data);
+    const tmpData = req.body;
+    console.log(tmpData);
+    const id = tmpData.id;
+    if (!id) {
+      return res.status(400).json({ error: "Invalid content!" });
+    }
+    const indx = result.findIndex((item) => item.id === tmpData.id);
+    delete tmpData.id;
+    result[indx] = { ...result[indx], ...tmpData };
+    fs.writeFile(
+      process.cwd() + "/data/users.json",
+      JSON.stringify(result, null, 2),
+      () => {
+        res.status(200).json({ data: { id } });
+      }
+    );
+  } catch {
+    res.status(500).json({ error: "Somthing went wrong!" });
+  }
+};
+
+exports.deleteUser = (req, res) => {
+  
+}
