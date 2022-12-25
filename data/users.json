@@ -5,7 +5,7 @@
     "gender": "male",
     "contact": "michael.lawson@reqres.in",
     "address": "mirpur-1",
-    "avatar": "https://reqres.in/img/faces/7-image.jpg"
+    "photoUrl": "https://reqres.in/img/faces/7-image.jpg"
   },
   {
     "id": 2,
@@ -13,7 +13,7 @@
     "gender": "male",
     "contact": "lindsay.ferguson@reqres.in",
     "address": "mirpur-2",
-    "avatar": "https://reqres.in/img/faces/8-image.jpg"
+    "photoUrl": "https://reqres.in/img/faces/8-image.jpg"
   },
   {
     "id": 3,
@@ -21,7 +21,7 @@
     "gender": "male",
     "contact": "tobias.funke@reqres.in",
     "address": "mirpur-10",
-    "avatar": "https://reqres.in/img/faces/9-image.jpg"
+    "photoUrl": "https://reqres.in/img/faces/9-image.jpg"
   },
   {
     "id": 4,
@@ -29,7 +29,7 @@
     "gender": "male",
     "contact": "byron.fields@reqres.in",
     "address": "mirpur-11",
-    "avatar": "https://reqres.in/img/faces/10-image.jpg"
+    "photoUrl": "https://reqres.in/img/faces/10-image.jpg"
   },
   {
     "id": 5,
@@ -37,7 +37,7 @@
     "gender": "male",
     "contact": "george.edwards@reqres.in",
     "address": "mirpur-12",
-    "avatar": "https://reqres.in/img/faces/11-image.jpg"
+    "photoUrl": "https://reqres.in/img/faces/11-image.jpg"
   },
   {
     "id": 6,
@@ -45,6 +45,14 @@
     "gender": "male",
     "contact": "rachel.howell@reqres.in",
     "address": "mirpur-14",
-    "avatar": "https://reqres.in/img/faces/12-image.jpg"
+    "photoUrl": "https://reqres.in/img/faces/12-image.jpg"
+  },
+  {
+    "id": 7,
+    "name": "ibrahim hossain",
+    "gender": "male",
+    "address": "mirpur-6",
+    "contact": "ibrahim.lawson@reqres.in",
+    "photoUrl": "https://reqres.in/img/faces/7-image.jpg"
   }
 ]
