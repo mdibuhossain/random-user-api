@@ -14,7 +14,7 @@ app.use(express.json());
 app.use("/user", userRouter);
 
 app.use("*", (req, res) => {
-  res.send("<h1><pre>Router doesn't exist!</pre></h1>");
+  res.send("<h1><pre>This route doesn't exist!</pre></h1>");
 });
 
 app.use(errorHandler);
