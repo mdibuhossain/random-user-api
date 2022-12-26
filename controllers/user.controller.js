@@ -82,7 +82,7 @@ exports.updateUser = (req, res) => {
     console.log(tmpData);
     const id = tmpData.id;
     if (!id) {
-      return res.status(400).json({ error: "Invalid content!" });
+      return res.status(400).json({ error: "Invalid content! ID required." });
     }
     const indx = result.findIndex((item) => item.id === tmpData.id);
     result[indx] = { ...result[indx], ...tmpData };
@@ -91,6 +91,32 @@ exports.updateUser = (req, res) => {
       JSON.stringify(result, null, 2),
       () => {
         res.status(200).json({ data: { id } });
+      }
+    );
+  } catch {
+    res.status(500).json({ error: "Somthing went wrong!" });
+  }
+};
+
+exports.updateManyUser = (req, res) => {
+  try {
+    const data = fs.readFileSync(process.cwd() + "/data/users.json");
+    let result = JSON.parse(data);
+    const tmpdata = req.body;
+    let returnData = new Array();
+    tmpdata.forEach((item) => {
+      if (!item.id) {
+        return res.status(400).json({ error: "Invalid content! ID required." });
+      }
+      const indx = result.findIndex((it) => it.id === item.id);
+      result[indx] = { ...result[indx], ...item };
+      returnData.push(item.id);
+    });
+    fs.writeFile(
+      process.cwd() + "/data/users.json",
+      JSON.stringify(result, null, 2),
+      () => {
+        res.status(200).json({ data: returnData });
       }
     );
   } catch {
