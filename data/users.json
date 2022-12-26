@@ -9,7 +9,7 @@
   },
   {
     "id": 2,
-    "name": "Lindsay Ferguson",
+    "name": "Lindsay  Hijabi",
     "gender": "male",
     "contact": "lindsay.ferguson@reqres.in",
     "address": "mirpur-2",
@@ -18,7 +18,7 @@
   {
     "id": 3,
     "name": "Tobias Funke",
-    "gender": "male",
+    "gender": "female",
     "contact": "tobias.funke@reqres.in",
     "address": "mirpur-10",
     "photoUrl": "https://reqres.in/img/faces/9-image.jpg"
@@ -27,8 +27,8 @@
     "id": 4,
     "name": "Byron Fields",
     "gender": "male",
-    "contact": "byron.fields@reqres.in",
-    "address": "mirpur-11",
+    "contact": "byrons@reqres.in",
+    "address": "mirpur-6",
     "photoUrl": "https://reqres.in/img/faces/10-image.jpg"
   },
   {
